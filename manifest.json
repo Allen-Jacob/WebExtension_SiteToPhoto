@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Photo web",
+  "version": "1.2.0",
+  "description": "Capture toute la page en PNG et regroupe les images par sessions de cinq minutes.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "debugger",
+    "storage",
+    "contextMenus",
+    "nativeMessaging"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Photographier toute la page",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "Capturer toute la page"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "keyboard.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
